@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>CMS</title>
+<title>SportsApp</title>
 <?= link_tag('assets/css/bootstrap.min.css') ?>
 </head>
 <body>
@@ -34,10 +34,12 @@
 	}
 }*/
 ?>
-        <li><?= anchor('publiccontroller/blog_list','Blog')  ?></li>
+        <li><?= anchor('','Contact')  ?></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><?= anchor('admin','Login')  ?></li>
+        <li><?= anchor('Admin','Admin Signup')  ?></li>
+       	<li><?= anchor('User','User Signup')  ?></li>
+        <li><?= anchor('Login','Login')  ?></li>
       </ul>
     </div>
   </div>
@@ -85,6 +87,19 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="form-group">
+						<label for="inputEmail" class="col-lg-2 control-label">Phone Number</label>
+						<div class="col-lg-10">
+						<?= form_input( ['name'=>'number', 'class'=>'form-control', 'id'=>'inputEmail', 'placeholder'=>'Phone Number', 'value'=>set_value('number')])?>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<?= form_error('number','<p class="text-danger">','</p>') ?>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6">
+					<div class="form-group">
 					  <label for="inputPassword" class="col-lg-2 control-label">Password</label>
 					  <div class="col-lg-10">
 						<?= form_password(['name'=>'password', 'class'=>'form-control', 'id'=>'inputPassword', 'placeholder'=>'Password', 'value'=>set_value('password')])?>
@@ -111,7 +126,7 @@
 			<div class="form-group">
 				  <div class="col-lg-10 col-lg-offset-2">
 					<?= form_reset('reset', 'Reset', ['class'=>'btn btn-default']) ?>
-					<?= form_submit('submit', 'Login', ['class'=>'btn btn-primary']) ?>
+					<?= form_submit('submit', 'Submit', ['class'=>'btn btn-primary']) ?>
 				  </div>
 			</div>
 		</fieldset>
