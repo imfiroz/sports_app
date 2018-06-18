@@ -3,7 +3,7 @@
 class Admin extends CI_Controller
 {
 	
-	 public function __construct() {
+	public function __construct() {
         parent::__construct();
         date_default_timezone_set('Asia/Kolkata'); 
 		$date = date('Y-M-d h:i:s A', time());
@@ -62,13 +62,16 @@ class Admin extends CI_Controller
 		{
 			$this->session->set_flashdata('feedback', $successMessage);
 			$this->session->set_flashdata('feedback_class','alert-success');
+			return redirect('Login');
 		}
 		else
 		{
 			$this->session->set_flashdata('feedback', $failureMessage);
 			$this->session->set_flashdata('feedback_class','alert-danger');
+			return redirect('Admin');
 		}
-		return redirect('Admin');
+		
 	}
+	
 	
 }

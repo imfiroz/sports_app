@@ -45,7 +45,17 @@
   </div>
 </nav>
 <div class="container">
-	<?= form_open('admin/login_form', 'class="form-horizontal"'); ?> 
+	<?php if($feedback_msg = $this->session->flashdata('feedback')): ?>
+				<div class="row">
+					<div class="col-lg-9">
+						<div class="alert alert-dismissible  <?= $this->session->flashdata('feedback_class') ?>">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<?= $feedback_msg ?>
+						</div>
+					</div>
+				</div>
+	<?php endif; ?>
+	<?= form_open('Login/login_form', 'class="form-horizontal"'); ?> 
 		  <fieldset>
 			<legend>Login</legend>
 			<?php if($error_msg = $this->session->flashdata('loggin_invalid')): ?>
