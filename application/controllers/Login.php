@@ -13,8 +13,10 @@ class Login extends CI_Controller
 	public function index()
 	{
 		//Sesstion has set then go to deshbord
-		if($this->session->userdata('user_id')) //preventing loggedin user to access this page
-		{return $this->load->view('admin/dashboard'); }
+		if($user_id = $this->session->userdata('user_id')) //preventing loggedin user to access this page
+		{
+			$user_data = $this->Usermodel->get_user($user_id);
+			return $this->load->view('admin/dashboard', compact('user_data')); }
 		$this->load->helper('form');
 		$this->load->view('login');
 	}

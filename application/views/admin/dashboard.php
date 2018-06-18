@@ -11,7 +11,7 @@
 		<?php endif; ?>	
 		<div class="col-lg-7 col-md-3 col-sm-4">
 
-			<h1>Admin Dasboard</h1>
+			<h1>Dasboard</h1>
 		</div>
 	</div>
 </div>

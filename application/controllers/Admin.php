@@ -49,10 +49,16 @@ class Admin extends CI_Controller
 		$admin_data['password'] = $this->encryption->encrypt($admin_data['password']);
 		//Save admin data
 		return $this->_falshAndRedirect($this->Usermodel->add($admin_data), 'Successfully Registered, Now you can login.', 'Registration Error, Try Again');
-		//echo '<pre>';
-		// Outputs: This is a plain-text message!
-		//echo $this->encryption->decrypt($ciphertext);
-		//print_r($admin_data); exit;
+		
+	}
+	public function add_location()
+	{
+		if($user_id = $this->session->userdata('user_id')) //preventing loggedin user to access this page
+		{
+			$user_data = $this->Usermodel->get_user($user_id);
+			return $this->load->view('admin/addlocation_1', compact('user_data')); }
+		$this->load->helper('form');
+		$this->load->view('login');
 		
 	}
 	private function _falshAndRedirect($successful, $successMessage, $failureMessage)

@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>CMS</title>
+<title>SportsApp</title>
 <?= link_tag('assets/css/bootstrap.min.css') ?>
 <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-alpha.2/classic/ckeditor.js"></script>
 </head>
@@ -21,7 +21,7 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav">
-       	<li><?= anchor('publiccontroller','View Home')  ?></li>
+       	<li><?= anchor('',$user_data->name)  ?></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><?= anchor('Login/logout','Logout')  ?></li>

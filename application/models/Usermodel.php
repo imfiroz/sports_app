@@ -23,5 +23,11 @@ class Usermodel extends CI_Model
 			return FALSE; 
 		}
 	}
+	public function get_user($user_id)
+	{
+		$user_data = $this->db->where(['id' => $user_id])
+							->get('users');
+		return $user_data->row();
+	}
 	
 }
