@@ -34,7 +34,7 @@
 	<div class="list-group table-of-contents">
 		<?= anchor('admin/view_user','View User', ['class'=> 'list-group-item'])  ?>
 		<?= anchor('admin/add_location','Add Location', ['class'=> 'list-group-item'])  ?>
-		<?= anchor('admin/view_location','Add Pages', ['class'=> 'list-group-item'])  ?>
+		<?= anchor('admin/view_location','View Location', ['class'=> 'list-group-item'])  ?>
 		
 	</div>
 </div>

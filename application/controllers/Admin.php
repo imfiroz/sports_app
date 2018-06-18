@@ -8,11 +8,11 @@ class Admin extends CI_Controller
         date_default_timezone_set('Asia/Kolkata'); 
 		$date = date('Y-M-d h:i:s A', time());
 		$this->load->model('Usermodel');
+		$this->load->helper('form');
 		 
     }
 	public function index()
 	{
-		$this->load->helper('form');
 		$this->load->view('admin_signup');
 	}
 	public function signup_form()
@@ -59,7 +59,10 @@ class Admin extends CI_Controller
 			return $this->load->view('admin/addlocation_1', compact('user_data')); }
 		$this->load->helper('form');
 		$this->load->view('login');
-		
+	}
+	public function save_location()
+	{
+		print_r($this->input->post());
 	}
 	private function _falshAndRedirect($successful, $successMessage, $failureMessage)
 	{

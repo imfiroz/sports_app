@@ -20,20 +20,6 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav">
-<?php //***Publish Menus Display
-/*if(	isset($menus)	){
-	//***Current Page Menu id for making active menu on current page
-	$current_menu_id = isset($page_data) ? $page_data->menu_id : false ;
-	foreach($menus as $menu)
-	{ 
-		?>
-		<li  <?= ($current_menu_id == $menu->id ) ? "class='active'" : false ?>>
-		<?= anchor("publiccontroller/index/{$menu->id}",$menu->menu_title) ?>
-		</li>
-		<?php	
-	}
-}*/
-?>
         <li><?= anchor('','Contact')  ?></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
