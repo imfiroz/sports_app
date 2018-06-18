@@ -12,7 +12,7 @@ class User extends CI_Controller
 	{
 		$this->load->library('form_validation');
 		//set rule
-		$this->form_validation->set_rules('username','User Name','required|alpha|trim');
+		$this->form_validation->set_rules('name','User Name','required|alpha|trim');
 		$this->form_validation->set_rules('number','Number','required|numeric');
 		$this->form_validation->set_rules('password','Password','required');
 		$this->form_validation->set_rules('cnfpassword', 'Password Confirmation', 'required|matches[password]');

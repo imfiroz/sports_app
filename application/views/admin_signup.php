@@ -45,6 +45,16 @@
   </div>
 </nav>
 <div class="container">
+	<?php if($feedback_msg = $this->session->flashdata('feedback')): ?>
+				<div class="row">
+					<div class="col-lg-9">
+						<div class="alert alert-dismissible  <?= $this->session->flashdata('feedback_class') ?>">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<?= $feedback_msg ?>
+						</div>
+					</div>
+				</div>
+	<?php endif; ?>
 	<?= form_open('Admin/signup_form', 'class="form-horizontal"'); ?> 
 		  <fieldset>
 			<legend>Admin Registration</legend>
@@ -63,12 +73,12 @@
 					<div class="form-group">
 						<label for="inputEmail" class="col-lg-2 control-label">Name</label>
 						<div class="col-lg-10">
-						<?= form_input( ['name'=>'adminname', 'class'=>'form-control', 'id'=>'inputEmail', 'placeholder'=>'Admin Name', 'value'=>set_value('adminname')])?>
+						<?= form_input( ['name'=>'name', 'class'=>'form-control', 'id'=>'inputEmail', 'placeholder'=>'Admin Name', 'value'=>set_value('adminname')])?>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6">
-					<?= form_error('adminname','<p class="text-danger">','</p>') ?>
+					<?= form_error('name','<p class="text-danger">','</p>') ?>
 				</div>
 			</div>
 			<div class="row">

@@ -63,12 +63,12 @@
 					<div class="form-group">
 						<label for="inputEmail" class="col-lg-2 control-label">Name</label>
 						<div class="col-lg-10">
-						<?= form_input( ['name'=>'username', 'class'=>'form-control', 'id'=>'inputEmail', 'placeholder'=>'User Name', 'value'=>set_value('username')])?>
+						<?= form_input( ['name'=>'name', 'class'=>'form-control', 'id'=>'inputEmail', 'placeholder'=>'User Name', 'value'=>set_value('username')])?>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6">
-					<?= form_error('username','<p class="text-danger">','</p>') ?>
+					<?= form_error('name','<p class="text-danger">','</p>') ?>
 				</div>
 			</div>
 			<div class="row">

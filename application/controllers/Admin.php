@@ -3,6 +3,13 @@
 class Admin extends CI_Controller
 {
 	
+	 public function __construct() {
+        parent::__construct();
+        date_default_timezone_set('Asia/Kolkata'); 
+		$date = date('Y-M-d h:i:s A', time());
+		$this->load->model('Usermodel');
+		 
+    }
 	public function index()
 	{
 		$this->load->helper('form');
@@ -12,7 +19,7 @@ class Admin extends CI_Controller
 	{
 		$this->load->library('form_validation');
 		//set rule
-		$this->form_validation->set_rules('adminname','User Name','required|alpha|trim');
+		$this->form_validation->set_rules('name','User Name','required|alpha|trim');
 		$this->form_validation->set_rules('number','Number','required|numeric');
 		$this->form_validation->set_rules('password','Password','required');
 		$this->form_validation->set_rules('cnfpassword', 'Password Confirmation', 'required|matches[password]');
@@ -25,10 +32,43 @@ class Admin extends CI_Controller
 		}
 		else
 		{	
-				echo 'success';
-				//$this->load->view('formsuccess');
+			$this->save_admin();
 		}
+	}
+	public function save_admin()
+	{
+		$date = date('Y-M-d h:i:s A', time());
+		$admin_data = $this->input->post();
+		$admin_data['created'] = $date;
+		//Setting admin role 1 and 0 for User
+		$admin_data['role'] = 1;
+		unset($admin_data['cnfpassword']);
+		unset($admin_data['submit']);
+		//Encrypting Password
+		$this->load->library('encryption');
+		$admin_data['password'] = $this->encryption->encrypt($admin_data['password']);
+		//Save admin data
+		return $this->_falshAndRedirect($this->Usermodel->add($admin_data), 'Successfully Registered, Now you can login.', 'Registration Error, Try Again');
+		//echo '<pre>';
+		// Outputs: This is a plain-text message!
+		//echo $this->encryption->decrypt($ciphertext);
+		//print_r($admin_data); exit;
 		
+	}
+	private function _falshAndRedirect($successful, $successMessage, $failureMessage)
+	{
+		//Created flash message and redirect function
+		if(	$successful	)
+		{
+			$this->session->set_flashdata('feedback', $successMessage);
+			$this->session->set_flashdata('feedback_class','alert-success');
+		}
+		else
+		{
+			$this->session->set_flashdata('feedback', $failureMessage);
+			$this->session->set_flashdata('feedback_class','alert-danger');
+		}
+		return redirect('Admin');
 	}
 	
 }
