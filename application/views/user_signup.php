@@ -45,6 +45,16 @@
   </div>
 </nav>
 <div class="container">
+	<?php if($feedback_msg = $this->session->flashdata('feedback')): ?>
+				<div class="row">
+					<div class="col-lg-9">
+						<div class="alert alert-dismissible  <?= $this->session->flashdata('feedback_class') ?>">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+							<?= $feedback_msg ?>
+						</div>
+					</div>
+				</div>
+	<?php endif; ?>
 	<?= form_open('User/signup_form_user', 'class="form-horizontal"'); ?> 
 		  <fieldset>
 			<legend>User Registration</legend>

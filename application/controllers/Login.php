@@ -14,7 +14,7 @@ class Login extends CI_Controller
 	{
 		//Sesstion has set then go to deshbord
 		if($this->session->userdata('user_id')) //preventing loggedin user to access this page
-		{return $this->load->view('Admin/dashboard'); }
+		{return $this->load->view('admin/dashboard'); }
 		$this->load->helper('form');
 		$this->load->view('login');
 	}
@@ -61,10 +61,15 @@ class Login extends CI_Controller
 		
 			return $this->index();
 	}
-	
-	
-	
-	
+	public function logout()
+	{
+		//logout and redirected to login page
+		$this->session->unset_userdata('user_id');
+		$this->session->set_flashdata('feedback', 'Successfully Logout.');
+		$this->session->set_flashdata('feedback_class','alert-success');
+		
+		return redirect('Login');
+	}
 	
 	
 }

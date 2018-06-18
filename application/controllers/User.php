@@ -2,7 +2,13 @@
 
 class User extends CI_Controller
 {
-	
+	public function __construct() {
+        parent::__construct();
+        date_default_timezone_set('Asia/Kolkata'); 
+		$date = date('Y-M-d h:i:s A', time());
+		$this->load->model('Usermodel');
+		 
+    }
 	public function index()
 	{
 		$this->load->helper('form');
@@ -28,6 +34,36 @@ class User extends CI_Controller
 		{	
 				echo 'success';
 				//$this->load->view('formsuccess');
+		}
+		
+	}
+	public function save_user()
+	{
+		$date = date('Y-M-d h:i:s A', time());
+		$admin_data = $this->input->post();
+		$admin_data['created'] = $date;
+		unset($admin_data['cnfpassword']);
+		unset($admin_data['submit']);
+		//Encrypting Password
+		$this->load->library('encryption');
+		$admin_data['password'] = $this->encryption->encrypt($admin_data['password']);
+		//Save admin data
+		return $this->_falshAndRedirect($this->Usermodel->add($admin_data), 'Successfully Registered, Now you can login.', 'Registration Error, Try Again');
+	}
+	private function _falshAndRedirect($successful, $successMessage, $failureMessage)
+	{
+		//Created flash message and redirect function
+		if(	$successful	)
+		{
+			$this->session->set_flashdata('feedback', $successMessage);
+			$this->session->set_flashdata('feedback_class','alert-success');
+			return redirect('Login');
+		}
+		else
+		{
+			$this->session->set_flashdata('feedback', $failureMessage);
+			$this->session->set_flashdata('feedback_class','alert-danger');
+			return redirect('User');
 		}
 		
 	}
