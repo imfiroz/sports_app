@@ -45,11 +45,11 @@
   </div>
 </nav>
 <div class="container">
-	<?= form_open('admin/login_form', 'class="form-horizontal"'); ?> 
+	<?= form_open('Admin/signup_form', 'class="form-horizontal"'); ?> 
 		  <fieldset>
 			<legend>Admin Registration</legend>
-			<?php if($error_msg = $this->session->flashdata('loggin_invalid')): ?>
-			<div class="row"><!--Setting loggin error message-->
+			<?php if($error_msg = $this->session->flashdata('signup_invalid')): ?>
+			<div class="row"><!--Setting Signup error message-->
 				<div class="col-lg-6">
 					<div class="alert alert-dismissible alert-danger">
 						<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -115,7 +115,7 @@
 					<div class="form-group">
 					  <label for="inputPassword" class="col-lg-2 control-label">Confirm Password</label>
 					  <div class="col-lg-10">
-						<?= form_password(['name'=>'cnfpassword', 'class'=>'form-control', 'id'=>'inputPassword', 'placeholder'=>'Password', 'value'=>set_value('cnfpassword')])?>
+						<?= form_password(['name'=>'cnfpassword', 'class'=>'form-control', 'id'=>'inputPassword', 'placeholder'=>'Confirm Password', 'value'=>set_value('cnfpassword')])?>
 					  </div>
 					</div>
 				</div>

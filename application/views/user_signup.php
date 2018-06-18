@@ -45,7 +45,7 @@
   </div>
 </nav>
 <div class="container">
-	<?= form_open('admin/login_form', 'class="form-horizontal"'); ?> 
+	<?= form_open('User/signup_form_user', 'class="form-horizontal"'); ?> 
 		  <fieldset>
 			<legend>User Registration</legend>
 			<?php if($error_msg = $this->session->flashdata('loggin_invalid')): ?>
@@ -63,12 +63,12 @@
 					<div class="form-group">
 						<label for="inputEmail" class="col-lg-2 control-label">Name</label>
 						<div class="col-lg-10">
-						<?= form_input( ['name'=>'adminname', 'class'=>'form-control', 'id'=>'inputEmail', 'placeholder'=>'Admin Name', 'value'=>set_value('adminname')])?>
+						<?= form_input( ['name'=>'username', 'class'=>'form-control', 'id'=>'inputEmail', 'placeholder'=>'User Name', 'value'=>set_value('username')])?>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6">
-					<?= form_error('adminname','<p class="text-danger">','</p>') ?>
+					<?= form_error('username','<p class="text-danger">','</p>') ?>
 				</div>
 			</div>
 			<div class="row">
@@ -115,7 +115,7 @@
 					<div class="form-group">
 					  <label for="inputPassword" class="col-lg-2 control-label">Confirm Password</label>
 					  <div class="col-lg-10">
-						<?= form_password(['name'=>'cnfpassword', 'class'=>'form-control', 'id'=>'inputPassword', 'placeholder'=>'Password', 'value'=>set_value('cnfpassword')])?>
+						<?= form_password(['name'=>'cnfpassword', 'class'=>'form-control', 'id'=>'inputPassword', 'placeholder'=>'Confirm Password', 'value'=>set_value('cnfpassword')])?>
 					  </div>
 					</div>
 				</div>
@@ -126,14 +126,14 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="form-group">
-					  <label for="inputEmail" class="col-lg-2 control-label">Location</label>
+					  <label for="inputEmail" class="col-lg-2 control-label">Location City</label>
 					  <div class="col-lg-10">
-						<?= form_input(['name'=>'location', 'class'=>'form-control', 'id'=>'inputEmail', 'placeholder'=>'Location', 'value'=>set_value('cnfpassword')])?>
+						<?= form_input(['name'=>'location', 'class'=>'form-control', 'id'=>'inputEmail', 'placeholder'=>'Enter City Name Only', 'value'=>set_value('cnfpassword')])?>
 					  </div>
 					</div>
 				</div>
 				<div class="col-lg-6">
-					<?= form_error('cnfpassword','<p class="text-danger">','</p>') ?>
+					<?= form_error('location','<p class="text-danger">','</p>') ?>
 				</div>
 			</div>
 			<div class="form-group">
