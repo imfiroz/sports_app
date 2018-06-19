@@ -134,7 +134,6 @@ class Admin extends CI_Controller
 			else
 			{
 				//Save and Redirect to next
-				echo '<pre>';
 				$step3_data = $this->input->post();
 				$step3_data['user_id'] = $user_id;
 				unset($step3_data['step']);
@@ -142,11 +141,7 @@ class Admin extends CI_Controller
 				unset($step3_data['submit']);
 				$this->load->model('Venuemodel');
 				$venue_id = $this->Venuemodel->update_details($step3_data);
-				
 				return $this->load->view('admin/addlocation_4', compact('user_data', 'venue_id')); 
-				
-				
-				exit;
 			}
 			
 		}
