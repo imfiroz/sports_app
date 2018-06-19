@@ -8,7 +8,7 @@
 			<h3>Enter Owner Contact Details:</h3>
 			<?= form_open('Admin/save_location'); ?>
 				<input type="hidden" name="step" value="4"/>
-				<input type="hidden" name="step" value="<?= $venue_id ?>"/>
+				<input type="hidden" name="venue_id" value="<?= $venue_id ?>"/>
 			<div class="form-group">
 				<?= form_input( ['name'=>'owner_name', 'class'=>'form-control form-control-lg', 'id'=>'inputLarge', 'placeholder'=>'Owner Name', 'value'=>set_value('owner_name')])?>
 				<?= form_error('owner_name','<p class="text-danger">','</p>') ?>

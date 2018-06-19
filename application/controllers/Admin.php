@@ -100,8 +100,8 @@ class Admin extends CI_Controller
 			if($this->form_validation->run() == FALSE)
 			{
 				//echo 'Error';
-				$step1_data = $this->input->post();
-				$venue_id = $step1_data['venue_id'];
+				$venue_data = $this->input->post();
+				$venue_id = $venue_data['venue_id'];
 				return $this->load->view('admin/addlocation_2', compact('user_data', 'venue_id'));
 			}
 			else
@@ -127,8 +127,8 @@ class Admin extends CI_Controller
 			{
 				//echo 'Error';
 				//print_r($image_name);
-				$step1_data = $this->input->post();
-				$venue_id = $step1_data['venue_id'];
+				$venue_data = $this->input->post();
+				$venue_id = $venue_data['venue_id'];
 				return $this->load->view('admin/addlocation_3', compact('user_data', 'venue_id'));
 			}
 			else
@@ -142,6 +142,31 @@ class Admin extends CI_Controller
 				$this->load->model('Venuemodel');
 				$venue_id = $this->Venuemodel->update_details($step3_data);
 				return $this->load->view('admin/addlocation_4', compact('user_data', 'venue_id')); 
+			}
+			
+		}
+		if( $step_data['step'] == 4 )
+		{
+			$this->form_validation->set_rules('owner_name','Owner Name','required|alpha|trim');
+			$this->form_validation->set_rules('owner_phone','Owner Contact Number','required|numeric');
+			$this->form_validation->set_rules('owner_email','Owner Email','required|valid_email');
+			$this->form_validation->set_rules('owner_address','Owner Address','required');
+			
+			if($this->form_validation->run() == FALSE)
+			{
+				//echo 'Error';
+				//print_r($image_name);
+				$venue_data = $this->input->post();
+				$venue_id = $venue_data['venue_id'];
+				return $this->load->view('admin/addlocation_4', compact('user_data', 'venue_id'));
+			}
+			else
+			{
+				//Save and Redirect to next
+				echo '<pre>';
+				print_r($this->input->post());
+				
+				
 			}
 			
 		}
