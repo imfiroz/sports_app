@@ -7,28 +7,31 @@
 			<h3>What kind of place it is?</h3>
 			<?= form_open('Admin/save_location'); ?>
 			<div class="form-group">
-				<input class="form-control form-control-lg" name="place_type" type="text" placeholder="Short Answer" id="inputLarge">
+				<input type="hidden" name="step" value="1"/>
+				<?= form_input( ['name'=>'place_type', 'class'=>'form-control form-control-lg', 'id'=>'inputLarge', 'placeholder'=>'Short Details', 'value'=>set_value('place_type')])?>
+				<?= form_error('place_type','<p class="text-danger">','</p>') ?>
 			</div>
+			
 			<h3>Its a closed place.</h3>
 			<div class="form-group">
-				<input class="form-control form-control-lg" name="close_type" type="text" placeholder="If Any" id="inputLarge">
+				<?= form_input( ['name'=>'close_place', 'class'=>'form-control form-control-lg', 'id'=>'inputLarge', 'placeholder'=>'If Any', 'value'=>set_value('close_place')])?>
 			</div>
 			<div class="form-group">
 					<?= form_submit('submit', 'Save and Next', ['class'=>'btn btn-primary']) ?>
 			</div>
 			
 			<html>
-<form>
+<!--<form>
 <input type="hidden" name="mapLat">
 <input type="hidden" name="mapLong">
 <input type="text" name="location">
 <input type="submit" name="submit" value="submit">
 </form>
-</html>
+</html>-->
 
 <?php
 
-extact($_POST);
+/*extact($_POST);
 if($mapLat =='' && $mapLong ==''){
         // Get lat long from google
         $latlong    =   get_lat_long($location); // create a function with the name "get_lat_long" given as below
@@ -49,7 +52,7 @@ function get_lat_long($address){
     $lat = $json->{'results'}[0]->{'geometry'}->{'location'}->{'lat'};
     $long = $json->{'results'}[0]->{'geometry'}->{'location'}->{'lng'};
     return $lat.','.$long;
-}
+}*/
 ?>		
 
 			

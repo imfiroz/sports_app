@@ -9,6 +9,7 @@ class Admin extends CI_Controller
 		$date = date('Y-M-d h:i:s A', time());
 		$this->load->model('Usermodel');
 		$this->load->helper('form');
+		$this->load->library('form_validation');
 		 
     }
 	public function index()
@@ -17,7 +18,7 @@ class Admin extends CI_Controller
 	}
 	public function signup_form()
 	{
-		$this->load->library('form_validation');
+		
 		//set rule
 		$this->form_validation->set_rules('name','User Name','required|alpha|trim');
 		$this->form_validation->set_rules('number','Number','required|numeric');
@@ -62,7 +63,66 @@ class Admin extends CI_Controller
 	}
 	public function save_location()
 	{
-		print_r($this->input->post());
+		if($user_id = $this->session->userdata('user_id')) //preventing loggedin user to access this page
+			{$user_data = $this->Usermodel->get_user($user_id);}
+		$step_data = $this->input->post();
+		
+		if( $step_data['step'] == 1)
+		{
+			
+			$this->form_validation->set_rules('place_type','Place type','required');
+			
+			if($this->form_validation->run() == FALSE)
+			{
+				//echo 'Error';
+				return $this->load->view('admin/addlocation_1', compact('user_data'));
+			}
+			else
+			{
+				//Save and Redirect to next
+				$this->load->model('Venuemodel');
+				$step1_data = $this->input->post();
+				$step1_data['user_id'] = $user_id;
+				unset($step1_data['step']);
+				unset($step1_data['submit']);
+				//print_r($this->input->post()); exit;
+				$venue_id = $this->Venuemodel->add_details($step1_data);
+				return $this->load->view('admin/addlocation_2', compact('user_data', 'venue_id')); 
+
+			}
+		}
+		
+		
+		if( $step_data['step'] == 2 )
+		{
+			$this->form_validation->set_rules('city','Pick location from Map','required|trim');
+			
+			if($this->form_validation->run() == FALSE)
+			{
+				//echo 'Error';
+				$step1_data = $this->input->post();
+				$venue_id = $step1_data['venue_id'];
+				return $this->load->view('admin/addlocation_2', compact('user_data', 'venue_id'));
+			}
+			else
+			{
+				//Save and Redirect to next
+				$this->load->model('Venuemodel');
+				$step2_data = $this->input->post();
+				$step2_data['user_id'] = $user_id;
+				$step2_data['lat_long'] = implode(',',[$step2_data['latitude'],$step2_data['longitude']]);
+				unset($step2_data['latitude']);
+				unset($step2_data['longitude']);
+				unset($step2_data['step']);
+				unset($step2_data['submit']);
+				$venue_id = $this->Venuemodel->update_details($step2_data);
+				return $this->load->view('admin/addlocation_3', compact('user_data', 'venue_id')); 
+
+			}
+			
+		}
+		
+		
 	}
 	private function _falshAndRedirect($successful, $successMessage, $failureMessage)
 	{
