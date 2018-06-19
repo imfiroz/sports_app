@@ -117,12 +117,76 @@ class Admin extends CI_Controller
 				unset($step2_data['submit']);
 				$venue_id = $this->Venuemodel->update_details($step2_data);
 				return $this->load->view('admin/addlocation_3', compact('user_data', 'venue_id')); 
-
+			}
+			
+		}
+		if( $step_data['step'] == 3 )
+		{
+			$this->form_validation->set_rules('images','Upload Image','required');
+			if($this->form_validation->run() == FALSE)
+			{
+				//echo 'Error';
+				//print_r($image_name);
+				$step1_data = $this->input->post();
+				$venue_id = $step1_data['venue_id'];
+				return $this->load->view('admin/addlocation_3', compact('user_data', 'venue_id'));
+			}
+			else
+			{
+				//Save and Redirect to next
+				echo '<pre>';
+				$step3_data = $this->input->post();
+				$step3_data['user_id'] = $user_id;
+				unset($step3_data['step']);
+				unset($step3_data['files']);
+				unset($step3_data['submit']);
+				$this->load->model('Venuemodel');
+				$venue_id = $this->Venuemodel->update_details($step3_data);
+				
+				return $this->load->view('admin/addlocation_4', compact('user_data', 'venue_id')); 
+				
+				
+				exit;
 			}
 			
 		}
 		
 		
+	}
+	public function upload()
+	{
+	  sleep(3);
+	  if($_FILES["files"]["name"] != '')
+	  {
+	   $output = '';
+	   $config["upload_path"] = './upload/';
+	   $config["allowed_types"] = 'gif|jpg|png';
+	   $this->load->library('upload', $config);
+	   $this->upload->initialize($config);
+	   for($count = 0; $count<count($_FILES["files"]["name"]); $count++)
+	   {
+		$_FILES["file"]["name"] = $_FILES["files"]["name"][$count];
+		$_FILES["file"]["type"] = $_FILES["files"]["type"][$count];
+		$_FILES["file"]["tmp_name"] = $_FILES["files"]["tmp_name"][$count];
+		$_FILES["file"]["error"] = $_FILES["files"]["error"][$count];
+		$_FILES["file"]["size"] = $_FILES["files"]["size"][$count];
+			if($this->upload->do_upload('file'))
+			{
+			 $data = $this->upload->data();
+			 $image_name[] = $data["file_name"];
+			 $output .= '
+			 <div class="card">
+			  <img src="'.base_url().'upload/'.$data["file_name"].'" class="img-responsive img-thumbnail" />
+			 </div>
+			 ';
+			//file Name
+			}
+		
+	   }
+		$image_names = implode(',',$image_name);
+	   echo '<input type="hidden" name="images" value="'.$image_names.'"/>';
+	   echo $output;   
+	  }
 	}
 	private function _falshAndRedirect($successful, $successMessage, $failureMessage)
 	{
